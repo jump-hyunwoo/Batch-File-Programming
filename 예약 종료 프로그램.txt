@@ -1,0 +1,47 @@
+@echo off
+echo 연만살의 예약 종료 프로그램입니다.
+echo 종료하길 원하는 시간을 6글자로 입력하세요.
+echo (ex. 오후 1시는 130000 입니다.)
+set /p target=input : 
+set th=%target:~0,2%
+IF "%th:~0,1%" == "0" (
+set th=%th:~1,1%
+)
+set tm=%target:~2,2%
+set ts=%target:~4,2%
+set h=%time:~0,2%
+set m=%time:~3,2%
+set s=%time:~6,2%
+set x=false
+set /a answer=0
+IF %th% GTR %h% (
+    set x=true
+) ELSE IF %th% == %h% IF %tm% GTR %m% (
+    set x=true
+) ELSE IF %th% == %h% IF %tm% == %m% IF %ts% GTR %s% (
+    set x=true
+)
+IF "%x%" == "true" (
+    set /a st1=th - h
+    set /a st1 *= 3600
+    set /a st2=m - tm
+    set /a st2 *= 60
+    set /a st3=s - ts
+    set /a st4=st1 - st2
+    set /a st5=st4 - st3
+    set /a answer=st5
+)
+IF "%x%" == "false" (
+    set /a st6=86400
+    set /a st7=h - th
+    set /a st7 *= 3600
+    set /a st8=m - tm
+    set /a st8 *= 60
+    set /a st9=s - ts
+    set /a st10 = st6 - st7
+    set /a st11 = st10 - st8
+    set /a st12 = st11 - st9
+    set /a answer=st12
+)
+shutdown -s -t %answer%
+pause>nul
