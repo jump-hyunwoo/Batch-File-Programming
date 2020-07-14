@@ -1,7 +1,7 @@
 @echo off
-echo This is Reservation End Program.
-echo Please enter the time you want to end in 6 letters.
-echo (ex. 1 p.m. = 130000)
+echo 연만살의 예약 종료 프로그램입니다.
+echo 종료하길 원하는 시간을 6글자로 입력하세요.
+echo (ex. 오후 1시는 130000 입니다.)
 set /p target=input : 
 set th=%target:~0,2%
 IF "%th:~0,1%" == "0" (
